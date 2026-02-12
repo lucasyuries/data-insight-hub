@@ -8,6 +8,7 @@ import SurveyAnalysis from "./pages/SurveyAnalysis";
 import CompanyComparison from "./pages/CompanyComparison";
 import Demographics from "./pages/Demographics";
 import Heatmap from "./pages/Heatmap";
+import Reports from "./pages/Reports";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/empresas" element={<CompanyComparison />} />
           <Route path="/demografico" element={<Demographics />} />
           <Route path="/heatmap" element={<Heatmap />} />
+          <Route path="/relatorios" element={<Reports />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

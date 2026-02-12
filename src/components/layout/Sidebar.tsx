@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
 import {
-  LayoutDashboard, BarChart3, Building2, Users, FileText,
+  LayoutDashboard, BarChart3, Building2, Users, FileText, Download,
   Settings, HelpCircle, ChevronLeft, ChevronRight, Shield
 } from "lucide-react";
 import { useState } from "react";
@@ -12,6 +12,7 @@ const menuItems = [
   { path: "/empresas", label: "Comparação Empresas", icon: Building2 },
   { path: "/demografico", label: "Perfil Demográfico", icon: Users },
   { path: "/heatmap", label: "Heatmap Satisfação", icon: FileText },
+  { path: "/relatorios", label: "Relatórios", icon: Download },
 ];
 
 const bottomItems = [

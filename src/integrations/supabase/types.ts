@@ -14,7 +14,80 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      google_forms_config: {
+        Row: {
+          company_name: string
+          created_at: string
+          form_url: string | null
+          id: string
+          is_active: boolean
+          last_sync_at: string | null
+          sheet_name: string
+          spreadsheet_id: string
+          updated_at: string
+        }
+        Insert: {
+          company_name: string
+          created_at?: string
+          form_url?: string | null
+          id?: string
+          is_active?: boolean
+          last_sync_at?: string | null
+          sheet_name?: string
+          spreadsheet_id: string
+          updated_at?: string
+        }
+        Update: {
+          company_name?: string
+          created_at?: string
+          form_url?: string | null
+          id?: string
+          is_active?: boolean
+          last_sync_at?: string | null
+          sheet_name?: string
+          spreadsheet_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      sync_logs: {
+        Row: {
+          config_id: string | null
+          error_message: string | null
+          finished_at: string | null
+          id: string
+          rows_synced: number | null
+          started_at: string
+          status: string
+        }
+        Insert: {
+          config_id?: string | null
+          error_message?: string | null
+          finished_at?: string | null
+          id?: string
+          rows_synced?: number | null
+          started_at?: string
+          status: string
+        }
+        Update: {
+          config_id?: string | null
+          error_message?: string | null
+          finished_at?: string | null
+          id?: string
+          rows_synced?: number | null
+          started_at?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sync_logs_config_id_fkey"
+            columns: ["config_id"]
+            isOneToOne: false
+            referencedRelation: "google_forms_config"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

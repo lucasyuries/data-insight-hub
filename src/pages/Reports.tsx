@@ -2,7 +2,8 @@ import { useState } from "react";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { companies, sections, getSectionAverage, getCompanyRespondents, respondents, questions, getQuestionAverage } from "@/data/mockData";
 import { exportCompanyReport, exportComparisonReport, exportRawData, exportHeatmapData } from "@/lib/exportUtils";
-import { Download, FileText, Building2, GitCompareArrows, Database, Grid3X3, CheckCircle2, AlertTriangle, XCircle } from "lucide-react";
+import { exportCompanyPDF, exportComparisonPDF } from "@/lib/pdfExport";
+import { Download, FileText, Building2, GitCompareArrows, Database, Grid3X3, CheckCircle2, AlertTriangle, XCircle, FileDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toast } from "@/hooks/use-toast";
 
@@ -140,13 +141,20 @@ export default function Reports() {
             >
               {companies.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
             </select>
-            <button
-              onClick={() => handleExport("empresa", () => exportCompanyReport(selectedCompany))}
-              className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
-            >
-              <Download className="h-4 w-4" />
-              Exportar {company.name}
-            </button>
+          <button
+            onClick={() => handleExport("empresa CSV", () => exportCompanyReport(selectedCompany))}
+            className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+          >
+            <Download className="h-4 w-4" />
+            CSV
+          </button>
+          <button
+            onClick={() => handleExport("empresa PDF", () => exportCompanyPDF(selectedCompany))}
+            className="flex items-center gap-2 rounded-lg bg-destructive px-4 py-2 text-sm font-medium text-destructive-foreground hover:bg-destructive/90 transition-colors"
+          >
+            <FileDown className="h-4 w-4" />
+            PDF Profissional
+          </button>
           </div>
 
           {/* Preview summary */}
@@ -253,14 +261,24 @@ export default function Reports() {
               </button>
             ))}
           </div>
-          <button
-            onClick={() => handleExport("comparativo", () => exportComparisonReport(compareIds))}
-            disabled={compareIds.length < 2}
-            className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:pointer-events-none"
-          >
-            <Download className="h-4 w-4" />
-            Exportar Comparativo ({compareIds.length} empresas)
-          </button>
+          <div className="flex gap-3">
+            <button
+              onClick={() => handleExport("comparativo CSV", () => exportComparisonReport(compareIds))}
+              disabled={compareIds.length < 2}
+              className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:pointer-events-none"
+            >
+              <Download className="h-4 w-4" />
+              CSV ({compareIds.length} empresas)
+            </button>
+            <button
+              onClick={() => handleExport("comparativo PDF", () => exportComparisonPDF(compareIds))}
+              disabled={compareIds.length < 2}
+              className="flex items-center gap-2 rounded-lg bg-destructive px-4 py-2 text-sm font-medium text-destructive-foreground hover:bg-destructive/90 transition-colors disabled:opacity-50 disabled:pointer-events-none"
+            >
+              <FileDown className="h-4 w-4" />
+              PDF ({compareIds.length} empresas)
+            </button>
+          </div>
         </div>
       </div>
     </DashboardLayout>

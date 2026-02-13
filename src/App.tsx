@@ -9,6 +9,7 @@ import CompanyComparison from "./pages/CompanyComparison";
 import Demographics from "./pages/Demographics";
 import Heatmap from "./pages/Heatmap";
 import Reports from "./pages/Reports";
+import GoogleSheetsConfig from "./pages/GoogleSheetsConfig";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/demografico" element={<Demographics />} />
           <Route path="/heatmap" element={<Heatmap />} />
           <Route path="/relatorios" element={<Reports />} />
+          <Route path="/integracoes" element={<GoogleSheetsConfig />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
